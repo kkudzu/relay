@@ -1,0 +1,19 @@
+{
+  "name": "eagler-26.2-minecraft-relay",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js",
+    "token": "node src/token-cli.js",
+    "test": "node --test test/*.test.js",
+    "cf:dev": "wrangler dev --config cloudflare/wrangler.toml",
+    "cf:deploy": "wrangler deploy --config cloudflare/wrangler.toml",
+    "deploy": "npm run cf:deploy"
+  },
+  "dependencies": {
+    "ws": "8.21.1"
+  },
+  "devDependencies": {
+    "wrangler": "4.114.0"
+  }
+}
