@@ -1,5 +1,5 @@
-name = "eagler-minecraft-relay"
-main = "worker.js"
+name = "relay"
+main = "cloudflare/worker.js"
 compatibility_date = "2026-07-24"
 
 [vars]
@@ -17,7 +17,3 @@ class_name = "LanRoom"
 [[migrations]]
 tag = "v1"
 new_sqlite_classes = ["LanRoom"]
-
-[[migrations]]
-tag = "v2"
-new_sqlite_classes = ["MinecraftTunnel"]

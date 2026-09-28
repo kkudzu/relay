@@ -6,8 +6,8 @@
     "start": "node src/server.js",
     "token": "node src/token-cli.js",
     "test": "node --test test/*.test.js",
-    "cf:dev": "wrangler dev --config cloudflare/wrangler.toml",
-    "cf:deploy": "wrangler deploy --config cloudflare/wrangler.toml",
+    "cf:dev": "wrangler dev",
+    "cf:deploy": "wrangler deploy",
     "deploy": "npm run cf:deploy"
   },
   "dependencies": {

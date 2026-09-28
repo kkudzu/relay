@@ -138,11 +138,9 @@ function disconnectPacket(peer, code, reason) {
   return packet([Uint8Array.of(0xfe), ascii8(peer), Uint8Array.of(code & 255), ascii16(reason)]);
 }
 
-function openLanUpstream(request, env) {
-  const configured = String(env.RELAY_LAN_UPSTREAM ?? "https://relay.deev.is/").trim();
-  const upstream = new URL(configured);
-  if (upstream.protocol !== "https:") throw new Error("LAN upstream must use HTTPS/WSS");
-  return fetch(new Request(upstream, request));
+function openLanRoom(request, env) {
+  const id = env.LAN_ROOM.idFromName("lan-room-registry");
+  return env.LAN_ROOM.get(id).fetch(request);
 }
 
 async function openMinecraftTunnel(request, target, env, ctx) {
@@ -287,11 +285,11 @@ export default {
       return Response.json({
         ok: true,
         protocol: "minecraft-java-byte-stream-v1",
-        lan: "eagler-1.8-webrtc-signaling-upstream-v1",
+        lan: "eagler-1.8-webrtc-p2p-durable-object-v1",
         capabilities: ["singleplayer", "multiplayer"],
         public: publicAccess,
         runtime: "cloudflare",
-        minecraftRuntime: "stateless-worker"
+        minecraftRuntime: "websocket-upstream"
       });
     }
     if (request.headers.get("upgrade")?.toLowerCase() !== "websocket") {
@@ -303,7 +301,7 @@ export default {
       const origin = request.headers.get("origin") ?? "";
       if (allowedOrigins.length && !allowedOrigins.includes(origin)) throw new Error("origin is not allowed");
       if (url.pathname === "/" || url.pathname === "") {
-        return openLanUpstream(request, env);
+        return openLanRoom(request, env);
       }
       if (url.pathname !== "/minecraft") {
         return errorResponse(404, "not found");

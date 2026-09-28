@@ -59,10 +59,11 @@ docker run --rm -p 8787:8787 -e RELAY_PUBLIC=1 eagler-relay
 
 ## Cloudflare Worker
 
-The current public Worker is available at:
+The default configuration deploys the `relay` Worker. On the Rohita Cloudflare
+account, it is available at:
 
 ```text
-wss://eagler-minecraft-relay.u2471966200.workers.dev
+wss://relay.rohita.workers.dev
 ```
 
 Add the base URL to the client's relay list and choose `Both`. The client uses `/minecraft` for Java servers and the root WebSocket for LAN signaling.
@@ -75,10 +76,18 @@ npx wrangler login
 npm run deploy
 ```
 
-For private mode, change `RELAY_PUBLIC` to `"0"` in `cloudflare/wrangler.toml`, store the secret, and deploy again:
+The root `wrangler.toml` targets the `relay` Worker. Authenticate Wrangler to
+the Cloudflare account that owns `rohita.workers.dev`, then deploy from the
+repository root with:
 
 ```bash
-npx wrangler secret put RELAY_SECRET --config cloudflare/wrangler.toml
+npx wrangler deploy
+```
+
+For private mode, change `RELAY_PUBLIC` to `"0"` in `wrangler.toml`, store the secret, and deploy again:
+
+```bash
+npx wrangler secret put RELAY_SECRET
 npm run deploy
 ```
 
@@ -89,7 +98,6 @@ npm run deploy
 - `RELAY_MAX_LIFETIME_MS` — optional connection lifetime; `0` disables it
 - `RELAY_MAX_LAN_PEERS` — maximum guests in a LAN room
 - `RELAY_ICE_SERVERS` — comma-separated STUN or TURN servers; add `;username;password` for TURN
-- `RELAY_LAN_UPSTREAM` — Eaglercraft 1.8 signaling relay endpoint
 - `RELAY_ALLOW_PRIVATE` — allows private TCP targets on a trusted local relay
 - `RELAY_CLIENT_HTML` — standalone client file served by the Node relay
 
@@ -98,7 +106,7 @@ npm run deploy
 ```bash
 npm audit --omit=dev
 npm test
-npx wrangler deploy --dry-run --config cloudflare/wrangler.toml
+npx wrangler deploy --dry-run
 ```
 
 ## License
