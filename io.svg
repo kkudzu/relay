@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 600 420">
+  <style>
+    .bg { fill: #0f172a; }
+    .card { fill: #1e293b; rx: 16px; stroke: #334155; stroke-width: 1; }
+    .btn-launch { fill: #3b82f6; cursor: pointer; transition: fill 0.2s; }
+    .btn-launch:hover { fill: #60a5fa; }
+    .btn-commit { fill: #8b5cf6; cursor: pointer; transition: fill 0.2s; }
+    .btn-commit:hover { fill: #a78bfa; }
+    .btn-clear { fill: #dc2626; cursor: pointer; transition: fill 0.2s; }
+    .btn-clear:hover { fill: #f87171; }
+    .title { fill: #f8fafc; font-family: system-ui, -apple-system, sans-serif; font-size: 22px; font-weight: 700; text-anchor: middle; }
+    .status { fill: #94a3b8; font-family: system-ui, -apple-system, sans-serif; font-size: 14px; text-anchor: middle; }
+    .btn-text { fill: #ffffff; font-family: system-ui, -apple-system, sans-serif; font-size: 14px; font-weight: 600; text-anchor: middle; pointer-events: none; }
+    
+    .input-box {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      height: 100%;
+      font-family: system-ui, -apple-system, sans-serif;
+      color: #94a3b8;
+      font-size: 13px;
+    }
+    .input-box input {
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 6px;
+      color: #f8fafc;
+      padding: 6px 10px;
+      font-size: 13px;
+      outline: none;
+      width: 120px;
+      text-align: center;
+      font-family: monospace;
+    }
+    .input-box input:focus {
+      border-color: #8b5cf6;
+    }
+  </style>
+
+  <rect width="100%" height="100%" class="bg" />
+  <rect x="40" y="30" width="520" height="360" class="card" />
+
+  <text x="300" y="85" class="title">Eaglercraft Offline Launcher</text>
+  <text x="300" y="118" id="statusText" class="status">Ready to load game...</text>
+
+  <!-- Launch Main/Latest Button -->
+  <g id="launchGroup">
+    <rect x="70" y="150" width="220" height="48" rx="10" class="btn-launch" />
+    <text x="180" y="180" class="btn-text">Download & Launch (Main)</text>
+  </g>
+
+  <!-- Clear Cache Button -->
+  <g id="clearGroup">
+    <rect x="310" y="150" width="220" height="48" rx="10" class="btn-clear" />
+    <text x="420" y="180" class="btn-text">Clear Cache</text>
+  </g>
+
+  <!-- Launch Specific Commit Button -->
+  <g id="commitGroup">
+    <rect x="70" y="215" width="460" height="48" rx="10" class="btn-commit" />
+    <text x="300" y="245" class="btn-text" id="commitBtnText">Download from commit: 56ec29f</text>
+  </g>
+
+  <!-- Interactive Commit Input -->
+  
+    
